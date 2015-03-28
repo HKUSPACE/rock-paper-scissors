@@ -1,12 +1,12 @@
 // 0: Paper, 1: Scissors, 2: Rock
 
+var choices = {P:'img/paper.png', S:'img/scissors.png', R:'img/rock.png'}
 var answers = ['P', 'S', 'R'];
 var userAnswer;
 var computerAnswer;
 
 var compare = function(uAnswer, cAnswer){
     var result = document.querySelector("#result");
-    alert(result);
     if (uAnswer == cAnswer){
         result.innerHTML = "This is a tie game.";
     }
@@ -36,6 +36,19 @@ var compare = function(uAnswer, cAnswer){
     }
 }
 
-compare(userAnswer, answers[computerAnswer]);
+//compare(userAnswer, answers[computerAnswer]);
+
+images = document.querySelectorAll("#choice-selector > img");
+
+for (var i = 0; i<images.length; i++){
+    images[i].onclick  = function(e){
+        e.preventDefault();
+        uAnswer = this.getAttribute("data-choice");
+        document.querySelector("#user-choice > img").src = choices[uAnswer];
+        computerAnswer = Math.floor(Math.random()*3);
+        document.querySelector("#computer-choice >img").src = choices[answers[computerAnswer]];
+        compare(uAnswer, answers[computerAnswer]);
+    }
+}
 
 
